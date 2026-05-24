@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo "Выберете гипервизор. Proxmox или WMware (пиши без скобок 1 или 2)"
-read -p "2) - proxmox 1) - WMware " Hyperivoz
-case $Hyperizor in
+echo "Выберете гипервизор. Proxmox или WMware (пиши ТОЛЬКО 1 или 2)"
+read -p -r "2) - proxmox 1) - WMware " Hypevisor
+case $Hyperisor in
   1)
     int_type="enp33"
     ;;
