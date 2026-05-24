@@ -14,5 +14,25 @@ case $Hyperisor in
     exit 1 
     ;;
 esac
+echo ""
+echo -e "\e[32mИспользуется $int_type\e[0m"
+echo ""
+hostnamectl hostname isp.au-team.irpo
+exec bash
 
-echo "Используется $int_type"
+apt-get update $$ apt-get install iptables -y
+echo ""
+echo -e "\e[32mОбновлён репозиторий. установлен iptables\e[0m"
+echo ""
+sed -i 's/net.ipv4.ip_forward = 0/net.ipv4.ip_forward = 1/' /etc/net/sysctl.conf
+sysctl -p
+systemctl restart network
+
+if ip link show $int_type &>/dev/null; then
+  iptables -t nat -A POSTROUTING -o $int_type -j MASQUERADE
+  /etc/init.d/ipatbles save
+  systemctl enable --now iptables
+else
+  echo ""
+  echo -e "\e[31mИнтерфейс $int_type не найден. ты точно выбрал proxmox?"
+  echo ""
