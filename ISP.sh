@@ -18,7 +18,6 @@ echo ""
 echo -e "\e[32mИспользуется $int_type\e[0m"
 echo ""
 hostnamectl hostname isp.au-team.irpo
-exec bash
 
 apt-get update $$ apt-get install iptables -y
 echo ""
@@ -37,3 +36,10 @@ else
   echo -e "\e[31mИнтерфейс $int_type не найден. ты точно выбрал proxmox?"
   echo ""
 fi
+
+
+
+
+
+
+exec bash
