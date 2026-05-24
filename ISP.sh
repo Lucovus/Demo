@@ -29,7 +29,7 @@ systemctl restart network
 
 if ip link show $int_type up &>/dev/null; then
   iptables -t nat -A POSTROUTING -o $int_type -j MASQUERADE
-  /etc/init.d/ipatbles save
+  /etc/init.d/iptables save
   systemctl enable --now iptables
 else
   echo ""
