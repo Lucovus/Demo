@@ -15,4 +15,4 @@ case $Hyperizor in
     ;;
 esac
 
-echo "Используется "$int_type"
+echo "Используется $int_type"
