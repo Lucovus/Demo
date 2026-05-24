@@ -4,7 +4,7 @@ echo "Выберете гипервизор. Proxmox или WMware (пиши Т�
 read -p "2) - proxmox 1) - WMware " Hypervisor
 case $Hypervisor in
   1)
-    int_type="enp33"
+    int_type="ens33"
     ;;
   2)
     int_type="enp7s1"
