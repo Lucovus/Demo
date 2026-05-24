@@ -1,8 +1,8 @@
 #!/bin/bash
 
 echo "Выберете гипервизор. Proxmox или WMware (пиши ТОЛЬКО 1 или 2)"
-read -p -r "2) - proxmox 1) - WMware " Hypevisor
-case $Hyperisor in
+read -p "2) - proxmox 1) - WMware " Hypevisor
+case $Hypervisor in
   1)
     int_type="enp33"
     ;;
@@ -36,3 +36,4 @@ else
   echo ""
   echo -e "\e[31mИнтерфейс $int_type не найден. ты точно выбрал proxmox?"
   echo ""
+fi
