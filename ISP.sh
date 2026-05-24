@@ -28,7 +28,7 @@ sed -i 's/net.ipv4.ip_forward = 0/net.ipv4.ip_forward = 1/' /etc/net/sysctl.conf
 sysctl -p
 systemctl restart network
 
-if ip link show $int_type &>/dev/null; then
+if ip link show $int_type up &>/dev/null; then
   iptables -t nat -A POSTROUTING -o $int_type -j MASQUERADE
   /etc/init.d/ipatbles save
   systemctl enable --now iptables
