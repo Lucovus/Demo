@@ -65,7 +65,7 @@ mkdir -p /etc/net/ifaces/gre1
 touch /etc/net/ifaces/gre1/options
 touch /etc/net/ifaces/gre1/ipv4address
 echo "10.10.10.1/30" > /etc/net/ifaces/gre1/ipv4address
-systemctl restart network
+
 
 cat << EOF > /etc/net/ifaces/gre1/options
 TYPE=iptun
@@ -73,8 +73,9 @@ TUNTYPE=gre
 TUNLOCAL=172.16.1.2
 TUNREMOTE=172.16.2.2
 TUNOPTIONS='ttl 64'
-
 EOF
+systemctl restart network
+
 apt-get update && apt-get install frr -y
 cat <<'EOF' > /etc/frr/frr.conf
 interface gre
