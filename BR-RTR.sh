@@ -45,6 +45,7 @@ systemctl restart network
 useradd net_admin
 echo "net_admin:P@ssw0rd" | chpasswd
 usermod -aG wheel net_admin
+touch /etc/sudoers.d/net_admin
 echo "WHEEL_USERS ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/net_admin
 
 apt-get update && apt-get install frr -y
@@ -68,5 +69,5 @@ exit
 EOF
 systemctl restart network
 systemctl enable --now frr
-
+systemctl enable --now sshd
 exec bash
