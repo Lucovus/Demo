@@ -16,7 +16,7 @@ esac
 echo ""
 echo -e "\e[32mИспользуется $int_type\e[0m"
 echo ""
-hostnamectl hostname isp.au-team.irpo
+hostnamectl hostname hq-rtr.au-team.irpo
 
 apt-get update $$ apt-get install iptables -y
 echo ""
