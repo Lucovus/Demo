@@ -7,7 +7,7 @@ case $Hypervisor in
     int_type="ens33"
     ;;
   2)
-    int_type="enp7s1"
+    int_type="enp2s1"
     ;;
   *)
     echo "Неправльно. напиши 1 или 2"
@@ -19,7 +19,7 @@ echo -e "\e[32mИспользуется $int_type\e[0m"
 echo ""
 hostnamectl hostname isp.au-team.irpo
 
-apt-get update $$ apt-get install iptables -y
+apt-get update && apt-get install iptables -y
 echo ""
 echo -e "\e[32mОбновлён репозиторий. установлен iptables\e[0m"
 echo ""
@@ -72,7 +72,7 @@ echo -e "\e[32mNginx файл конфига готов\e[0m"
 ln -s /etc/nginx/sites-available.d/r-proxy.conf /etc/nginx/sites-enabled.d/
 systemctl enable --now nginx
 apt-get update && apt-get install apache2-htpasswd -y
-read -p "Какой пользователь указан в задани для Apache2? Напиши без пробелов " pass_apache
-htpasswd -c /etc/nginx/.htpasswd $pass_apache
+read -p "Какой пользователь указан в задани для Apache2? Напиши без пробелов " user_apache
+htpasswd -c /etc/nginx/.htpasswd $user_apache
 
 exec bash
