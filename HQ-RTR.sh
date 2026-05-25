@@ -18,7 +18,7 @@ echo -e "\e[32mИспользуется $int_type\e[0m"
 echo ""
 hostnamectl hostname hq-rtr.au-team.irpo
 
-apt-get update $$ apt-get install iptables -y
+apt-get update && apt-get install iptables -y
 echo ""
 echo -e "\e[32mОбновлён репозиторий. установлен iptables\e[0m"
 echo ""
