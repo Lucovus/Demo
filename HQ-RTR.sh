@@ -39,7 +39,7 @@ if [[ $Hypervisor == 2 ]]; then
   mkdir -p /etc/net/ifaces/{enp7s2,vlan{100,200,999}}
   touch /etc/net/ifaces/enp7s2/options
   echo "TYPE=eth" > /etc/net/ifaces/enp7s2/options
-  echo $'100\n200\n999' | xargs -i bash -c 'echo -e "TYPE=vlan\nHOST=enp7s2\nVID={}" > /etc/net/ifaces/vlan{}/options'
+  echo $'100\n200\n999' | xargs -i bash -c 'echo -e "TYPE=vlan\nHOST=enp2s2\nVID={}" > /etc/net/ifaces/vlan{}/options'
 else
   mkdir -p /etc/net/ifaces/{ens37,vlan{100,200,999}}
   touch /etc/net/ifaces/ens37/options
