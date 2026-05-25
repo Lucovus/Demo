@@ -47,7 +47,6 @@ TUNTYPE=gre
 TUNLOCAL=172.16.1.2
 TUNREMOTE=172.16.2.2
 TUNOPTIONS='ttl 64'
-
 EOF
 systemctl restart network
 
