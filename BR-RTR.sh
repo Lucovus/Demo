@@ -1,3 +1,4 @@
+#!bin/bash
 echo "Выберете гипервизор. Proxmox или WMware (пиши ТОЛЬКО 1 или 2)"
 read -p "2) - proxmox 1) - WMware " Hypervisor
 case $Hypervisor in
