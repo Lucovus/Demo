@@ -55,6 +55,17 @@ echo "$ip-vlan100" > /etc/net/ifaces/vlan100/ipv4address
 echo "$ip-vlan200" > /etc/net/ifaces/vlan200/ipv4address
 echo "$ip-vlan100" > /etc/net/ifaces/vlan999/ipv4address
 
+useradd net_admin
+echo "net_admin:P@ssw0rd" | chpasswd
+usermod -aG wheel net_admin
+echo "WHEEL_USERS ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/net_admin
+
+mkdir -p /etc/net/ifaces/gre1
+touch /etc/net/ifaces/gre1/options
+touch /etc/net/ifaces/gre1/ipv4address
+echo "10.10.10.1/30" > /etc/net/ifaces/gre1/ipv4address
+systemctl restart network
+
 cat << EOF > /etc/net/ifaces/gre1/options
 TYPE=iptun
 TUNTYPE=gre
@@ -63,3 +74,34 @@ TUNREMOTE=172.16.2.2
 TUNOPTIONS='ttl 64'
 
 EOF
+apt-get update && apt-get install frr -y
+cat <<'EOF' > /etc/frr/frr.conf
+interface gre
+ no ip ospf passive
+exit
+!
+interface gre1
+ ip ospf area 0
+ ip ospf authentication
+ ip ospf authentication-key P@ssw0rd
+ no ip ospf passive
+exit
+!
+interface vlan100
+ ip ospf area 0
+exit
+!
+interface vlan200
+ ip ospf area 0
+exit
+!
+interface vlan999
+ ip ospf area 0
+exit
+!
+router ospf
+ passive-interface default
+exit
+
+EOF
+systemctl enable -now frr
