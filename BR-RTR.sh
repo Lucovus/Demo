@@ -66,3 +66,4 @@ router ospf
 exit
 EOF
 systemctl restart network
+systemctl enable --now frr
