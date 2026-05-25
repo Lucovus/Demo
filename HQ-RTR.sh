@@ -51,9 +51,9 @@ read -p "Какой IP адресс и МАСКА для vlan100 ПО ЗАДАН
 read -p "Какой IP адресс и МАСКА для vlan200 ПО ЗАДАНИЮ? пиши без пробелов пример: 192.168.200.1/28" ip_vlan200
 read -p "Какой IP адресс и МАСКА для vlan999 ПО ЗАДАНИЮ? пиши без пробелов пример: 192.168.99.1/29" ip_vlan999
 echo ""
-echo "$ip-vlan100" > /etc/net/ifaces/vlan100/ipv4address
-echo "$ip-vlan200" > /etc/net/ifaces/vlan200/ipv4address
-echo "$ip-vlan100" > /etc/net/ifaces/vlan999/ipv4address
+echo "$ip_vlan100" > /etc/net/ifaces/vlan100/ipv4address
+echo "$ip_vlan200" > /etc/net/ifaces/vlan200/ipv4address
+echo "$ip_vlan100" > /etc/net/ifaces/vlan999/ipv4address
 
 useradd net_admin
 echo "net_admin:P@ssw0rd" | chpasswd
