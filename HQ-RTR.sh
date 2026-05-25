@@ -57,6 +57,7 @@ echo "$ip_vlan100" > /etc/net/ifaces/vlan999/ipv4address
 
 useradd net_admin
 echo "net_admin:P@ssw0rd" | chpasswd
+touch /etc/sudoers.d/net_admin
 usermod -aG wheel net_admin
 echo "WHEEL_USERS ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/net_admin
 
