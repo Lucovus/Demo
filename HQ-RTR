@@ -104,4 +104,21 @@ router ospf
 exit
 
 EOF
+
+systemctl restart network
 systemctl enable -now frr
+
+sed -i 's/AUTO_LOCAL_RESOLVER=yes/AUTO_LOCAL_RESOLVER=no/' /etc/sysconfig/dnsmasq ; grep AUTO_LOCAL_RESOLVER /etc/sysconfig/dnsmasq
+
+cat <<'EOF' > /etc/dnsmasq.conf
+port=0
+interface=vlan200
+listen-address=192.168.200.1
+dhcp-authoritative
+dhcp-range=interface:vlan200,192.168.200.2,192.168.200.2,255.255.255.240,6h
+dhcp-option=3,192.168.200.1
+dhcp-option=6,192.168.100.2
+leasefile-ro
+EOF
+
+
