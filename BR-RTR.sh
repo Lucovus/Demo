@@ -44,8 +44,8 @@ echo "10.10.10.2/30" > /etc/net/ifaces/gre1/ipv4address
 cat << EOF > /etc/net/ifaces/gre1/options
 TYPE=iptun
 TUNTYPE=gre
-TUNLOCAL=172.16.1.2
-TUNREMOTE=172.16.2.2
+TUNLOCAL=172.16.2.2
+TUNREMOTE=172.16.1.2
 TUNOPTIONS='ttl 64'
 EOF
 systemctl restart network
