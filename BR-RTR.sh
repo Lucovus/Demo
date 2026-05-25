@@ -67,7 +67,7 @@ interface gre1
  no ip ospf passive
 exit
 !
-interface enp7s2
+interface enp2s2
  ip ospf area 0
 exit
 !
