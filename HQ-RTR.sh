@@ -120,9 +120,9 @@ listen-address=192.168.200.1
 dhcp-authoritative
 dhcp-range=interface:vlan200,192.168.200.2,192.168.200.2,255.255.255.240,6h
 dhcp-option=3,192.168.200.1
-dhcp-option=6,192.168.100.2
+dhcp-option=6,192.168.1.2
 leasefile-ro
 EOF
-
+systemctl enable --now dnsmasq
 
 exec bash
