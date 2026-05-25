@@ -68,3 +68,5 @@ exit
 EOF
 systemctl restart network
 systemctl enable --now frr
+
+exec bash
