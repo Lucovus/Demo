@@ -6,7 +6,7 @@ case $Hypervisor in
     int_type="ens33"
     ;;
   2)
-    int_type="enp7s1"
+    int_type="enp2s1"
     ;;
   *)
     echo "Неправльно. напиши 1 или 2"
