@@ -108,6 +108,7 @@ EOF
 systemctl restart network
 systemctl enable -now frr
 
+apt-get update && apt-get install dnsmasq -y
 sed -i 's/AUTO_LOCAL_RESOLVER=yes/AUTO_LOCAL_RESOLVER=no/' /etc/sysconfig/dnsmasq ; grep AUTO_LOCAL_RESOLVER /etc/sysconfig/dnsmasq
 
 cat <<'EOF' > /etc/dnsmasq.conf
@@ -122,3 +123,4 @@ leasefile-ro
 EOF
 
 
+exec bash
