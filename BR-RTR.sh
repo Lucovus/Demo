@@ -56,7 +56,6 @@ apt-get update && apt-get install sudo -y
 useradd net_admin
 echo "net_admin:P@ssw0rd" | chpasswd
 usermod -aG wheel net_admin
-touch /etc/sudoers.d/net_admin
 echo "WHEEL_USERS ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/net_admin
 
 apt-get update && apt-get install frr -y
