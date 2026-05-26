@@ -52,6 +52,7 @@ TUNOPTIONS='ttl 64'
 EOF
 systemctl restart network
 
+apt-get update && apt-get install sudo -y
 useradd net_admin
 echo "net_admin:P@ssw0rd" | chpasswd
 usermod -aG wheel net_admin
