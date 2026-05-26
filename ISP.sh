@@ -36,7 +36,16 @@ else
   echo -e "\e[31mИнтерфейс $int_type не найден. ты точно выбрал proxmox?"
   echo ""
 fi
-
+if [[$Hypervisor == 2 ]]; then
+  read -p "какой ip в сторону HQ-RTR? пиши без пробелов. пример: 172.25.1.1 " ip_enp2s2
+  read -p "какой ip в сторону BQ-RTR? пиши без пробелов. пример: 172.26.1.1 " ip_enp2s3
+  mkdir /etc/net/ifaces/enp2s2
+  mkdir /etc/net/ifaces/enp2s3
+  echo -e "BOOTPROTO=static\nTYPE=eth" > /etc/net/ifaces/enp2s2/options
+  echo -e "BOOTPROTO=static\nTYPE=eth" > /etc/net/ifaces/enp2s3/options
+  echo "$ip_enp2s2" > /etc/net/ifaces/enp2s2/ipv4address
+  echo "$ip_enp2s3" > /etc/net/ifaces/enp2s3/ipv4address
+fi
 apt-get update && apt-get install nginx -y
 cat << "EOF" > /etc/nginx/sites-available.d/r-proxy.conf
 server {
