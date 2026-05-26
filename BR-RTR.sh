@@ -59,7 +59,7 @@ usermod -aG wheel net_admin
 echo "WHEEL_USERS ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/net_admin
 
 apt-get update && apt-get install frr -y
-sed -i 's/ospfd=no/ospfd=yes/' /etc/frr/daemons ; grep ospf /etc/frr/daemons
+sed -i 's/ospfd=no/ospfd=yes/' /etc/frr/daemons
 cat <<'EOF' > /etc/frr/frr.conf
 
 interface gre1
