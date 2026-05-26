@@ -35,7 +35,7 @@ else
   echo -e "\e[31mИнтерфейс $int_type не найден. ты точно выбрал proxmox?"
   echo ""
 fi
-if [[$Hypervisor == 2 ]]; then
+if [[ $Hypervisor == 2 ]]; then
   read -p "какой ip в сторону HQ-RTR? пиши без пробелов. пример: 172.25.1.1 " ip_enp2s2
   read -p "какой ip в сторону BQ-RTR? пиши без пробелов. пример: 172.26.1.1 " ip_enp2s3
   mkdir /etc/net/ifaces/enp2s2
