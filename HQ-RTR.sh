@@ -61,7 +61,6 @@ iptables -t nat -A PREROUTING -i $int_type -p tcp --dport 8080 -j DNAT --to-dest
 apt-get update && apt-get install sudo -y
 useradd net_admin
 echo "net_admin:P@ssw0rd" | chpasswd
-touch /etc/sudoers.d/net_admin
 usermod -aG wheel net_admin
 echo "WHEEL_USERS ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/net_admin
 
