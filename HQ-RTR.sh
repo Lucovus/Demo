@@ -2,8 +2,8 @@
 say() {
         echo "$1" | iconv -f utf-8 -t cp1251 2>/dev/null || echo "$1"
 }
-echo "Выберете гипервизор. Proxmox или WMware (пиши ТОЛЬКО 1 или 2)"
-read -p "2) - proxmox 1) - WMware " Hypervisor
+echo -e "1) VMware\n2) Proxmox"
+read -p "Выберите вариант: (1 или 2)" Hypervisor
 case $Hypervisor in
   1)
     int_type="ens33"
