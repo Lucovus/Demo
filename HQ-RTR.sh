@@ -1,4 +1,7 @@
 #!bin/bash
+say() {
+        echo "$1" | iconv -f utf-8 -t cp1251 2>/dev/null || echo "$1"
+}
 echo "Выберете гипервизор. Proxmox или WMware (пиши ТОЛЬКО 1 или 2)"
 read -p "2) - proxmox 1) - WMware " Hypervisor
 case $Hypervisor in
