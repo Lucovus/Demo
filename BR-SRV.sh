@@ -11,3 +11,4 @@ read -p "какой порт у ssh по заданию? Без пробелов
 read -p "Сколько попыток авторизации по заданию? Без пробелов только цифру " Max_auth
 echo -e "Port ${port_ssh}\nMaxAuthTries ${Max_auth}\nAllowUsers sshuser\nBanner /etc/openssh/banner\n" >> /etc/openssh/sshd_config
 systemctl restart sshd
+exec bash
