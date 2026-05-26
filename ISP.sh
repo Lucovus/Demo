@@ -25,7 +25,6 @@ echo -e "\e[32mОбновлён репозиторий. установлен ipt
 echo ""
 sed -i 's/net.ipv4.ip_forward = 0/net.ipv4.ip_forward = 1/' /etc/net/sysctl.conf
 sysctl -p
-systemctl restart network
 
 if ip link show $int_type up &>/dev/null; then
   iptables -t nat -A POSTROUTING -o $int_type -j MASQUERADE
@@ -53,7 +52,7 @@ server {
     server_name web.au-team.irpo;
 
     location / {
-        proxy_pass http://172.16.1.10:8080;
+        proxy_pass http://${ip_enp2s2}:8080;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -69,7 +68,7 @@ server {
     server_name docker.au-team.irpo;
 
     location / {
-        proxy_pass http://172.16.2.10:8080;
+        proxy_pass http://${ip_enp2s3}:8080;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -83,5 +82,5 @@ systemctl enable --now nginx
 apt-get update && apt-get install apache2-htpasswd -y
 read -p "Какой пользователь указан в задани для Apache2? Напиши без пробелов " user_apache
 htpasswd -c /etc/nginx/.htpasswd $user_apache
-
+systemctl restart network
 exec bash
