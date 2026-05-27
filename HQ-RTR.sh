@@ -58,8 +58,8 @@ echo "$ip_vlan100" > /etc/net/ifaces/vlan100/ipv4address
 echo "$ip_vlan200" > /etc/net/ifaces/vlan200/ipv4address
 echo "$ip_vlan100" > /etc/net/ifaces/vlan999/ipv4address
 
-iptables -t nat -A PREROUTING -i $int_type -p tcp --dport 2026 -j DNAT --to-destination $ip_vlan100
-iptables -t nat -A PREROUTING -i $int_type -p tcp --dport 8080 -j DNAT --to-destination ${ip_vlan100}:80
+iptables -t nat -A PREROUTING -i $int_type -p tcp --dport 2026 -j DNAT --to-destination ${ip_vlan100%/*}
+iptables -t nat -A PREROUTING -i $int_type -p tcp --dport 8080 -j DNAT --to-destination ${ip_vlan100%/*}:80
 
 apt-get update && apt-get install sudo -y
 useradd net_admin
