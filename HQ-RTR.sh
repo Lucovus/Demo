@@ -72,12 +72,13 @@ touch /etc/net/ifaces/gre1/options
 touch /etc/net/ifaces/gre1/ipv4address
 echo "10.10.10.1/30" > /etc/net/ifaces/gre1/ipv4address
 
-
+read -p "Напишите IP HQ-RTR который смотрет на верх (В сторону ISP) " ip_hq_rtrr
+read -p "Напишите IP BR-RTR который смотрет на верх (В сторону ISP) " ip_br_rtrr
 cat << EOF > /etc/net/ifaces/gre1/options
 TYPE=iptun
 TUNTYPE=gre
-TUNLOCAL=172.16.1.2
-TUNREMOTE=172.16.2.2
+TUNLOCAL=${ip_hq_rtrr}
+TUNREMOTE=${ip_br_rtrr}
 TUNOPTIONS='ttl 64'
 EOF
 systemctl restart network
