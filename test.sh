@@ -25,10 +25,10 @@ zone "168.192.in-addr.arpa" {
  file "168.192.in-addr.arpa";
 };
 EOF
-read -p "Напишите IP интерфейса enp2s1 без маски который на BR-RTR " ip_br-rtr
-read -p "Напишите IP интерфейса enp2s1 без маски который на HQ-RTR " ip_hq-rtr
-cat <<'EOF' > /etc/bind/zone/au-team.irpo
-$TTL  1D
+read -p "Напишите IP интерфейса enp2s1 без маски который на BR-RTR " ip_br_rtr
+read -p "Напишите IP интерфейса enp2s1 без маски который на HQ-RTR " ip_hq_rtr
+cat <<EOF > /etc/bind/zone/au-team.irpo
+\$TTL  1D
 @    IN   SOA   au-team.irpo. root.au-team.irpo. (
                 2025020600 ; serial
                 12H        ; refresh
@@ -42,8 +42,8 @@ hq-srv  IN   A    192.168.100.2
 hq-cli  IN   A    192.168.200.2
 br-rtr  IN   A    192.168.1.1
 br-srv  IN   A    192.168.1.2
-docker  IN   A    ${ip_hq-rtr}
-web     IN   A    ${ip-br-rtr}
+docker  IN   A    ${ip_hq_rtr}
+web     IN   A    ${ip_br_rtr}
 
 EOF
 
