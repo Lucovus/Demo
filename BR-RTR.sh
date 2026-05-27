@@ -41,6 +41,8 @@ fi
 read -p "Какой айпи адресс в сторону BR-SRV? Посмотри задание. Пиши без пробелов. Рекмоендуется 192.168.1.1/24 " ip_srv
 iptables -t nat -A PREROUTING -i $int_type -p tcp -m multiport --dports 8080,2026 -j DNAT --to-destination $ip_srv
 
+mkdir -p /etc/net/ifaces/enp2s2
+
 mkdir -p /etc/net/ifaces/gre1
 touch /etc/net/ifaces/gre1/options
 touch /etc/net/ifaces/gre1/ipv4address
