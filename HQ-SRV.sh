@@ -48,7 +48,7 @@ EOF
 read -p "Напишите IP интерфейса enp2s1 без маски который на BR-RTR " ip_br_rtr
 read -p "Напишите IP интерфейса enp2s1 без маски который на HQ-RTR " ip_hq_rtr
 cat <<EOF > /etc/bind/zone/au-team.irpo
-$TTL  1D
+\$TTL  1D
 @    IN   SOA   au-team.irpo. root.au-team.irpo. (
                 2025020600 ; serial
                 12H        ; refresh
