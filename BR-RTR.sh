@@ -96,7 +96,7 @@ interface gre1
  no ip ospf passive
 exit
 !
-interface ${wm_type}
+interface ${vm_type}
  ip ospf area 0
 exit
 !
