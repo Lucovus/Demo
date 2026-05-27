@@ -40,11 +40,15 @@ else
 fi
 read -p "Какой айпи адресс в сторону BR-SRV? Посмотри задание. Пиши без пробелов. Рекмоендуется 192.168.1.1/24 " ip_srv
 iptables -t nat -A PREROUTING -i $int_type -p tcp -m multiport --dports 8080,2026 -j DNAT --to-destination ${ip_srv%/*}
-
-mkdir -p /etc/net/ifaces/enp2s2
-echo -e "BOOTPROTO=static\nTYPE=eth" > /etc/net/ifaces/enp2s2/options
-echo "$ip_srv" > /etc/net/ifaces/enp2s2/ipv4address
-  
+if [[ $Hypevisor == 2 ]]; then
+  mkdir -p /etc/net/ifaces/enp2s2
+  echo -e "BOOTPROTO=static\nTYPE=eth" > /etc/net/ifaces/enp2s2/options
+  echo "$ip_srv" > /etc/net/ifaces/enp2s2/ipv4address
+else
+  mkdir -p /etc/net/ifaces/ens37
+  echo -e "BOOTPROTO=static\nTYPE=eth" > /etc/net/ifaces/ens37/options
+  echo "$ip_srv" > /etc/net/ifaces/ens37/ipv4address
+fi
 mkdir -p /etc/net/ifaces/gre1
 touch /etc/net/ifaces/gre1/options
 touch /etc/net/ifaces/gre1/ipv4address
@@ -57,6 +61,7 @@ TUNLOCAL=172.16.2.2
 TUNREMOTE=172.16.1.2
 TUNOPTIONS='ttl 64'
 EOF
+
 systemctl restart network
 
 apt-get update && apt-get install sudo -y
@@ -65,9 +70,24 @@ echo "net_admin:P@ssw0rd" | chpasswd
 usermod -aG wheel net_admin
 echo "WHEEL_USERS ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/net_admin
 
+echo -e "1) VMware\n2) Proxmox"
+read -p "Выберите вариант: (1 или 2)" Hypervisor
+case $Hypervisor in
+  1)
+    vm_type="ens37"
+    ;;
+  2)
+    vm_type="enp2s2"
+    ;;
+  *)
+    echo "Неправльно. напиши 1 или 2"
+    exit 1 
+    ;;
+esac
+
 apt-get update && apt-get install frr -y
 sed -i 's/ospfd=no/ospfd=yes/' /etc/frr/daemons
-cat <<'EOF' > /etc/frr/frr.conf
+cat <<EOF > /etc/frr/frr.conf
 
 interface gre1
  ip ospf area 0
@@ -76,7 +96,7 @@ interface gre1
  no ip ospf passive
 exit
 !
-interface enp2s2
+interface ${wm_type}
  ip ospf area 0
 exit
 !
@@ -84,6 +104,7 @@ router ospf
  passive-interface default
 exit
 EOF
+
 systemctl restart network
 systemctl enable --now frr
 systemctl enable --now sshd
