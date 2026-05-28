@@ -60,7 +60,7 @@ cat << EOF > /etc/net/ifaces/gre1/options
 TYPE=iptun
 TUNTYPE=gre
 TUNLOCAL=${ip_br_rtrr}
-TUNREMOTE=${ip_br_rtrr}
+TUNREMOTE=${ip_hq_rtrr}
 TUNOPTIONS='ttl 64'
 EOF
 
