@@ -1,3 +1,7 @@
+
+read -p "какой ip в сторону HQ-RTR? пиши без пробелов. пример: 172.25.1.1/30 " ip_enp2s2
+read -p "какой ip в сторону BQ-RTR? пиши без пробелов. пример: 172.26.1.1/30 " ip_enp2s3
+
 cat << EOF > /etc/nginx/sites-available.d/r-proxy.conf
 server {
     listen 80;
