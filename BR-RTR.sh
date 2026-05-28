@@ -54,8 +54,8 @@ touch /etc/net/ifaces/gre1/options
 touch /etc/net/ifaces/gre1/ipv4address
 echo "10.10.10.2/30" > /etc/net/ifaces/gre1/ipv4address
 
-read -p "Напишите IP HQ-RTR который смотрет на верх (В сторону ISP) " ip_hq_rtrr
-read -p "Напишите IP BR-RTR который смотрет на верх (В сторону ISP) " ip_br_rtrr
+read -p "Напишите IP HQ-RTR который смотрет на верх (В сторону ISP) БЕЗ МАСКИ. NO MASK! " ip_hq_rtrr
+read -p "Напишите IP BR-RTR который смотрет на верх (В сторону ISP) БЕЗ МАСКИ. NO MASK! " ip_br_rtrr
 cat << EOF > /etc/net/ifaces/gre1/options
 TYPE=iptun
 TUNTYPE=gre
