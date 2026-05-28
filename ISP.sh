@@ -82,7 +82,7 @@ echo -e "\e[32mNginx файл конфига готов\e[0m"
 ln -s /etc/nginx/sites-available.d/r-proxy.conf /etc/nginx/sites-enabled.d/
 systemctl enable --now nginx
 apt-get update && apt-get install apache2-htpasswd -y
-read -p "Какой пользователь указан в задани для Apache2? Напиши без пробелов " user_apache
+read -p "Какой пользователь указан в задани для Apache2? Напиши без пробелов. Далее тебе предложит пароль" user_apache
 htpasswd -c /etc/nginx/.htpasswd $user_apache
 systemctl restart network
 exec bash
