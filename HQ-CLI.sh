@@ -10,6 +10,6 @@ mkdir /mnt/nfs
 chmod -R 777 /mnt/nfs
 showmount -e hq-srv
 cp /etc/fstab /etc/fstab.back
-echo "192.168.1.10:/raid/nfs /mnt/nfs nfs rw,soft,_netdev 0 0	" >> /etc/fstab
+echo "192.168.100.2:/raid/nfs /mnt/nfs nfs rw,soft,_netdev 0 0	" >> /etc/fstab
 mount -av
 df -T
