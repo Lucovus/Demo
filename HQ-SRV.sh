@@ -114,12 +114,12 @@ systemctl enable --now mariadb
 
 mariadb -e "CREATE DATABASE webdb;"
 mariadb -e "
-CREATE USER 'web'@'localhost' IDENTIFIED BY 'P@ssw0rd';
-GRANT ALL PRIVILEGES ON webdb.* TO 'web'@'localhost';
+CREATE USER 'webuser'@'localhost' IDENTIFIED BY 'P@ssw0rd';
+GRANT ALL PRIVILEGES ON webdb.* TO 'webuser'@'localhost';
 "
 
 mariadb webdb < /mnt/web/dump.sql
-read -p "Какой пользователь прописан в задании? " webUser
+read -p "Какой пользователь прописан в задании для web-сайта(не докер)? " webUser
 read -p "Какой пароль пользователя прописан в задании? " passUser
 sed -i "s/^\$username = .*/\$username = \"${webUser}\";/" /var/www/html/index.php
 sed -i "s/^\$password = .*/\$password = \"${passUser}\";/" /var/www/html/index.php
