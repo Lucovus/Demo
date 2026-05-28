@@ -38,8 +38,8 @@ else
   echo ""
 fi
 if [[ $Hypervisor == 2 ]]; then
-  read -p "какой ip в сторону HQ-RTR? пиши без пробелов. пример: 172.25.1.1 " ip_enp2s2
-  read -p "какой ip в сторону BQ-RTR? пиши без пробелов. пример: 172.26.1.1 " ip_enp2s3
+  read -p "какой ip в сторону HQ-RTR? пиши без пробелов. пример: 172.25.1.1/30 " ip_enp2s2
+  read -p "какой ip в сторону BQ-RTR? пиши без пробелов. пример: 172.26.1.1/30 " ip_enp2s3
   mkdir /etc/net/ifaces/enp2s2
   mkdir /etc/net/ifaces/enp2s3
   echo -e "BOOTPROTO=static\nTYPE=eth" > /etc/net/ifaces/enp2s2/options
@@ -48,13 +48,13 @@ if [[ $Hypervisor == 2 ]]; then
   echo "$ip_enp2s3" > /etc/net/ifaces/enp2s3/ipv4address
 fi
 apt-get update && apt-get install nginx -y
-cat << "EOF" > /etc/nginx/sites-available.d/r-proxy.conf
+cat << EOF > /etc/nginx/sites-available.d/r-proxy.conf
 server {
     listen 80;
     server_name web.au-team.irpo;
 
     location / {
-        proxy_pass http://${ip_enp2s2}:8080;
+        proxy_pass http://${ip_enp2s2%/*}:8080;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -70,7 +70,7 @@ server {
     server_name docker.au-team.irpo;
 
     location / {
-        proxy_pass http://${ip_enp2s3}:8080;
+        proxy_pass http://${ip_enp2s3%/*}:8080;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
