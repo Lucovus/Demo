@@ -84,6 +84,7 @@ EOF
 systemctl restart network
 
 apt-get update && apt-get install frr -y
+sed -i 's/ospfd=no/ospfd=yes/' /etc/frr/daemons
 cat <<'EOF' > /etc/frr/frr.conf
 interface gre
  no ip ospf passive
