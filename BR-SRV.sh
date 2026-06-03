@@ -26,7 +26,7 @@ samba-tool domain provision
 mv /etc/krb5.conf /etc/krb5.conf.back 
 cp /var/lib/samba/private/krb5.conf /etc/krb5.conf 
 
-sed -i 's/nameserver 8.8.8.8/nameserver 127.0.0.1/' /etc/net/ifaces/enp2s1/resolv.conf; systemctl restart network; cat /etc/resolv.conf
+sed -i 's/nameserver 8.8.8.8/nameserver 127.0.0.1/' /etc/net/ifaces/enp7s1/resolv.conf; systemctl restart network; cat /etc/resolv.conf
 
 
 
