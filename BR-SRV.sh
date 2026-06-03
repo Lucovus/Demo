@@ -35,6 +35,10 @@ samba-tool dns add br-srv.au-team.irpo au-team.irpo br-rtr A 192.168.3.1 -U Admi
 samba-tool dns add br-srv.au-team.irpo au-team.irpo web.au-team.irpo A 172.16.1.1 -U Administrator
 samba-tool dns add br-srv.au-team.irpo au-team.irpo docker.au-team.irpo A 172.16.2.1 -U Administrator
 
+for i in {1..5}; do samba-tool user add hquser$i P@ssw0rd; done
+for i in {1..5}; do samba-tool group addmembers hq hquser$i; done
+apt-get install ansible sshpass -y
+sed -i '/^\[defaults\]/a host_key_checking = False\ninterpreter_python=auto_silent'
 
 systemctl enable --now samba 
 systemctl restart sshd
