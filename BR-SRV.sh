@@ -20,7 +20,7 @@ apt-get update && apt-get install -y task-samba-dc
 rm -f /etc/samba/smb.conf
 rm -rf {/var/lib/samba, /var/cache/samba}
 mkdir -p /var/lib/samba/sysvol
-echo -e "\e[33Внимание! в DNS backend укажи IP HQ-SRV !!!\e["
+echo -e "\e[33Внимание! в DNS forwardes укажи IP HQ-SRV !!!\e["
 samba-tool domain provision
 
 mv /etc/krb5.conf /etc/krb5.conf.back 
