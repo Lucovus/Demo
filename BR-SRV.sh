@@ -28,13 +28,14 @@ cp /var/lib/samba/private/krb5.conf /etc/krb5.conf
 
 sed -i 's/nameserver 8.8.8.8/nameserver 127.0.0.1/' /etc/net/ifaces/enp7s1/resolv.conf; systemctl restart network; cat /etc/resolv.conf
 
-
+read -p "Напишите IP интерфейса enp2s3 без маски который на ISP " ip_br_rtr
+read -p "Напишите IP интерфейса enp2s2 без маски который на ISP " ip_hq_rtr
 
 samba-tool dns add br-srv.au-team.irpo au-team.irpo hq-srv A 192.168.100.2 -U Administrator
 samba-tool dns add br-srv.au-team.irpo au-team.irpo hq-rtr A 192.168.100.1 -U Administrator
 samba-tool dns add br-srv.au-team.irpo au-team.irpo br-rtr A 192.168.1.2 -U Administrator
-samba-tool dns add br-srv.au-team.irpo au-team.irpo web.au-team.irpo A 172.16.1.1 -U Administrator
-samba-tool dns add br-srv.au-team.irpo au-team.irpo docker.au-team.irpo A 172.16.2.1 -U Administrator
+samba-tool dns add br-srv.au-team.irpo au-team.irpo web.au-team.irpo A ${ip_hq_rtr} -U Administrator
+samba-tool dns add br-srv.au-team.irpo au-team.irpo docker.au-team.irpo A ${ip_br_rtr} -U Administrator
 
 for i in {1..5}; do samba-tool user add hquser$i P@ssw0rd; done
 for i in {1..5}; do samba-tool group addmembers hq hquser$i; done
