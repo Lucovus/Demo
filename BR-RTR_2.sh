@@ -2,7 +2,7 @@
 
 systemctl disable --now nftables
 apt-get update && apt-get install iptables -y
-iptables -t nat -A PREROUTING -i enp7s1 -p tcp -m multiport --dports 8084,2014 -j DNAT --to-destination 192.168.1.1
+iptables -t nat -A PREROUTING -i enp7s1 -p tcp -m multiport --dports 8084,2014 -j DNAT --to-destination 192.168.1.2
 echo ""
 echo -e "\e[32mОбновлён репозиторий. установлен iptables\e[0m"
 echo ""
