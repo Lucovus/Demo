@@ -29,14 +29,7 @@ else
   echo -e "\e[31mИнтерфейс $int_type не найден. ты точно выбрал proxmox?"
   echo ""
 fi
-if [[ $Hypervisor == 2 ]]; then
-  mkdir /etc/net/ifaces/enp7s2
-  mkdir /etc/net/ifaces/enp7s3
-  echo -e "BOOTPROTO=static\nTYPE=eth" > /etc/net/ifaces/enp7s2/options
-  echo -e "BOOTPROTO=static\nTYPE=eth" > /etc/net/ifaces/enp7s3/options
-  echo "172.16.70.1" > /etc/net/ifaces/enp7s2/ipv4address
-  echo "172.16.80.1" > /etc/net/ifaces/enp7s3/ipv4address
-fi
+
 apt-get update && apt-get install nginx -y
 cat << EOF > /etc/nginx/sites-available.d/r-proxy.conf
 server {
