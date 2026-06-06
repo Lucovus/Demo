@@ -36,5 +36,9 @@ mariadb webdb < /mnt/web/dump.sql
 
 sed -i "s/^\$username = .*/\$username = \"web4c\";/" /var/www/html/index.php
 sed -i "s/^\$password = .*/\$password = \"P@ssw0rd\";/" /var/www/html/index.php
+
+echo "docker  IN  A  172.16.80.1" >> /etc/bind/zone/au-team.irpo
+echo "web     IN  A  172.16.70.1" >> /etc/bind/zone/au-team.irpo
+systemctl restart bind
 systemctl enable --now httpd2.service
 exec bash
