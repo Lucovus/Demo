@@ -1,8 +1,9 @@
 #!/bin/bash
 parted -s /dev/sdb mklabel msdos mkpart primary 1MiB 100% set 1 raid on
 parted -s /dev/sdc mklabel msdos mkpart primary 1MiB 100% set 1 raid on
+parted -s /dev/sdd mklabel msdos mkpart primary 1MiB 100% set 1 raid on
 
-mdadm --create /dev/md0 --level=0 --raid-devices=2 /dev/sdb1 /dev/sdc1 --yes
+mdadm --create /dev/md4 --level=5 --raid-devices=3 /dev/sdb1 /dev/sdc1 /dev/sdd1 --yes
 mdadm --detail --scan >> /etc/mdadm.conf
 mkfs.ext4 /dev/md0
 mkdir /raid
